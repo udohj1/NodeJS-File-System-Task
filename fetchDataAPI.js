@@ -1,5 +1,17 @@
+const fs = require('fs');
 const fetch = require('node-fetch');
 
+
 fetch('http://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(json => console.log(json));
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    
+    fs.writeFile('./result/post.json', JSON.stringify(myJson), 'utf8', (err) => {
+        if (err) throw err;
+        console.log('a JSON file was created.')
+    });
+  });
+
+
